@@ -9,6 +9,7 @@ import Modal from "react-modal";
 import Loading from "react-loading";
 import { fetchRecipes } from "../utils/api";
 import FoodList from "./FoodList";
+import ShoppingList from "./ShoppingList";
 
 class App extends Component {
   state = {
@@ -16,21 +17,27 @@ class App extends Component {
     loadingFood: false,
     meal: null,
     day: null,
-    food: null
+    food: null,
+    ingredientsModalOpen: false
   };
-  //打开模板
+  componentWillMount() {
+    Modal.setAppElement("body");
+  }
+  //打开食物模板
   openFoodModal = ({ meal, day }) => {
-    this.setState(() => {
-      foodModalOpen: true, meal, day;
+    this.setState({
+      foodModalOpen: true,
+      meal,
+      day
     });
   };
-  // 关闭模板
+  // 关闭食物模板
   closeFoodModal = () => {
-    this.setState(() => {
-      foodModalOpen: false;
-      meal: null;
-      day: null;
-      food: null;
+    this.setState({
+      foodModalOpen: false,
+      meal: null,
+      day: null,
+      food: null
     });
   };
   // 查找食物
@@ -44,12 +51,39 @@ class App extends Component {
       this.setState({ food, loadingFood: false })
     );
   };
+  // 打开成分模板
+  openIngredientsModal = () => {
+    this.setState({ ingredientsModalOpen: true });
+  };
+  // 关闭成分模板
+  closeIngredientsModal = () => {
+    this.setState({ ingredientsModalOpen: false });
+  };
+  // 生成成分模板
+  generateShoppingList = () => {
+    return this.props.calendar
+      .reduce((result, { meals }) => {
+        const { breakfast, lunch, dinner } = meals;
+        breakfast && result.push(breakfast);
+        lunch && result.push(lunch);
+        dinner && result.push(dinner);
+        return result;
+      }, [])
+      .reduce((ings, { ingredientLines }) => ings.concat(ingredientLines), []);
+  };
   render() {
     const { calendar, selectRecipe, remove } = this.props;
-    const { foodModalOpen, food, loadingFood } = this.state;
+    const { foodModalOpen, food, loadingFood,ingredientsModalOpen } = this.state;
     const mealOrder = ["breakfast", "lunch", "dinner"];
+
     return (
       <div className="container">
+        <div className="nav">
+          <h1 className="header">Meals</h1>
+          <button className="shopping-list" onClick={this.openIngredientsModal}>
+            Shopping List
+          </button>
+        </div>
         <ul className="meal-types">
           {mealOrder.map(mealType => (
             <li key={mealType} className="subheader">
@@ -93,6 +127,7 @@ class App extends Component {
             ))}
           </div>
         </div>
+        {/* 查找食物模板页 */}
         <Modal
           className="modal"
           overlayClassName="overlay"
@@ -111,8 +146,7 @@ class App extends Component {
             ) : (
               <div className="search-container">
                 <h3 className="subheader">
-                  Find a meal for {capitalize(this.state.day)}
-                  {this.state.meal}
+                  Find a meal for {capitalize(this.state.day)} {this.state.meal}
                 </h3>
                 <div className="search">
                   <input
@@ -141,6 +175,17 @@ class App extends Component {
               </div>
             )}
           </div>
+        </Modal>
+        <Modal
+          className="modal"
+          overlayClassName="overlay"
+          isOpen={ingredientsModalOpen}
+          onRequestClose={this.closeIngredientsModal}
+          contentLabel="Modal"
+        >
+          {ingredientsModalOpen && (
+            <ShoppingList list={this.generateShoppingList()} />
+          )}
         </Modal>
       </div>
     );

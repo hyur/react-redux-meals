@@ -7,13 +7,13 @@ export const REMOVE_FROM_CALENDAR = "REMOVE_FROM_CALENDAR";
  * 务必使action保持专一性，不能出现副作用。
  */
 
-//第一个动作创建器action creator，添加一个新食谱： 接收三个属性（星期几、食谱和餐型）
-export function addRecipe({ day, recipe, meal }) {
+//第一个动作创建器action creator，添加一个新食谱： 接收三个属性（星期几、餐型和食谱）
+export function addRecipe({ day, meal,recipe}) {
   return {
     type: ADD_RECIPE,
     day,
-    recipe,
-    meal
+    meal,
+    recipe
   };
 }
 
