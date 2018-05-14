@@ -1,11 +1,11 @@
 
-### 继续优化中。。。
+### ★★★继续优化中。。。
 
 ### 项目说明：
 使用create-react-app快速构建的React+Redux应用，该应用实现了一个简易版的订餐功能
 
 ### 环境参数：
-- 技术语言 — HTML、CSS、JavaScript
+- 技术语言 — HTML、CSS、JavaScript★★★★★★★
 - 技术栈   — React16.3.2 + redux4.0.0 + react-redux5.0.7 + ES6
 - 环境配置 — NodeJS 
 - 开发环境 —不限
