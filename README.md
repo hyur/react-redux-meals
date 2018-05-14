@@ -9,7 +9,6 @@
 - 技术栈   — React16.3.2 + redux4.0.0 + react-redux5.0.7 + ES6
 - 环境配置 — NodeJS 
 - 开发环境 —不限
-- 架构模式 —模块化开发、前后端完全分离
 
 
 ### 环境部署：
@@ -38,7 +37,7 @@
 
 - 主界面
 
-<img src="https://github.com/hyur/react-redux-meals/blob/master/images/index.png" width="800px" height="334px"/>
+<img src="https://github.com/hyur/react-redux-meals/blob/master/images/index.png" width="750px" height="334px"/>
 
 - 搜索界面
 <img src="https://github.com/hyur/react-redux-meals/blob/master/images/search.png" width="750px" height="334px"/>
