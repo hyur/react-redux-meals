@@ -43,7 +43,7 @@
 <img src="https://github.com/hyur/react-redux-meals/blob/master/images/search.png" width="750px" height="334px"/>
 
 - 加载界面
-<img src="https://github.com/hyur/react-redux-meals/blob/master/images/loading.png" width="750px" height="334px"/>
+<img src="https://github.com/hyur/react-redux-meals/blob/master/images/longing.png" width="750px" height="334px"/>
 
 - 餐饮显示界面
 <img src="https://github.com/hyur/react-redux-meals/blob/master/images/meal.png" width="750px" height="334px"/>
